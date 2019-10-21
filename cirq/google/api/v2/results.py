@@ -18,7 +18,6 @@ from typing import (cast, Dict, Iterable, Iterator, List, NamedTuple, Optional,
 from collections import OrderedDict
 import numpy as np
 
-from cirq.api.google.v2 import result_pb2
 from cirq.google.api import v2
 from cirq import circuits
 from cirq import devices
@@ -141,8 +140,8 @@ def results_to_proto(
         trial_sweeps: Iterable[Iterable[study.TrialResult]],
         measurements: List[MeasureInfo],
         *,
-        out: Optional[result_pb2.Result] = None,
-) -> result_pb2.Result:
+        out: Optional[v2.result_pb2.Result] = None,
+) -> v2.result_pb2.Result:
     """Converts trial results from multiple sweeps to v2 protobuf message.
 
     Args:
@@ -152,7 +151,7 @@ def results_to_proto(
         out: Optional message to populate. If not given, create a new message.
     """
     if out is None:
-        out = result_pb2.Result()
+        out = v2.result_pb2.Result()
     for trial_sweep in trial_sweeps:
         sweep_result = out.sweep_results.add()
         for i, trial_result in enumerate(trial_sweep):
@@ -174,7 +173,7 @@ def results_to_proto(
     return out
 
 def results_from_proto(
-        msg: result_pb2.Result,
+        msg: v2.result_pb2.Result,
         measurements: List[MeasureInfo] = None,
 ) -> List[List[study.TrialResult]]:
     """Converts a v2 result proto into List of list of trial results.
@@ -198,7 +197,7 @@ def results_from_proto(
 
 
 def _trial_sweep_from_proto(
-        msg: result_pb2.SweepResult,
+        msg: v2.result_pb2.SweepResult,
         measure_map: Dict[str, MeasureInfo] = None,
 ) -> List[study.TrialResult]:
     """Converts a SweepResult proto into List of list of trial results.

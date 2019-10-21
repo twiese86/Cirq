@@ -171,7 +171,7 @@ def schedule_to_proto_dicts(schedule: Schedule) -> Iterable[Dict]:
 
 
 def schedule_from_proto_dicts(
-        device: 'xmon_device.XmonDevice',
+        device: 'cirq.Device',
         ops: Iterable[Dict],
 ) -> Schedule:
     """Convert proto dictionaries into a Schedule for the given device."""

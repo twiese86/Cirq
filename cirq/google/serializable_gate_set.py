@@ -21,8 +21,8 @@ from typing import cast, Dict, Iterable, List, Optional, Tuple, Type, Union, \
 from google.protobuf import json_format
 
 from cirq import circuits, ops, schedules, value
-from cirq.api.google import v2
 from cirq.google import op_deserializer, op_serializer
+from cirq.google.api import v2
 
 if TYPE_CHECKING:
     import cirq
